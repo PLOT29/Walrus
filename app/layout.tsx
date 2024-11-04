@@ -1,27 +1,18 @@
+import { ReactNode } from "react";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
 
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import 'react-datepicker/dist/react-datepicker.css'
+import "react-datepicker/dist/react-datepicker.css";
+import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
-import { Toaster } from "@/components/ui/toaster"
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Walrus",
-  description: "Your best coworker",
+  title: "YOOM",
+  description: "Video calling App",
   icons: {
     icon: "/icons/logo.svg",
   },
@@ -29,29 +20,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
       <ClerkProvider
         appearance={{
           layout: {
-            logoImageUrl: '/icons/yoom-logo.svg',
-            socialButtonsVariant: 'iconButton'
+            socialButtonsVariant: "iconButton",
+            logoImageUrl: "/icons/yoom-logo.svg",
           },
           variables: {
-            colorText: '#fff',
-            colorPrimary: '#0E78F9',
-            colorBackground: '#1c1f2e',
-            colorInputBackground: '#252a41',
-            colorInputText: '#fff'
-          }   
+            colorText: "#fff",
+            colorPrimary: "#0E78F9",
+            colorBackground: "#1C1F2E",
+            colorInputBackground: "#252A41",
+            colorInputText: "#fff",
+          },
         }}
       >
-        <body className={`${geistSans.variable} ${geistMono.variable} bg-dark-2 antialiased`}>
-          {children}
+        <body className={`${inter.className} bg-dark-2`}>
           <Toaster />
+          {children}
         </body>
       </ClerkProvider>
     </html>

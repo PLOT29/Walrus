@@ -1,23 +1,13 @@
-import StreamVideoProvider from '@/providers/StreamClientProvider'
-import { Metadata } from 'next';
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
-export const metadata: Metadata = {
-  title: "Walrus",
-  description: "Your best coworker",
-  icons: {
-    icon: "/icons/logo.svg",
-  },
-};
+import StreamVideoProvider from '@/providers/StreamClientProvider';
 
-const rootLayout = ({ children }: { children: ReactNode }) => {
+const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <main>
-      <StreamVideoProvider>
-        {children}
-      </StreamVideoProvider>
+      <StreamVideoProvider>{children}</StreamVideoProvider>
     </main>
-  )
-}
+  );
+};
 
-export default rootLayout
+export default RootLayout;
