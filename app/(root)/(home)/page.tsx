@@ -1,18 +1,27 @@
+import { useMemo } from 'react';
 import MeetingTypeList from '@/components/MeetingTypeList';
 
 const Home = () => {
   const now = new Date();
+  const adjustedTime = new Date(now); // Copia de `now`
+  adjustedTime.setHours(adjustedTime.getHours() - 1); // Resta una hora
 
-  const time = now.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZone: 'America/New_York' // Cambia esto a tu zona horaria local
-  });
-  
-  const date = (new Intl.DateTimeFormat('en-US', { 
-    dateStyle: 'full', 
-    timeZone: 'America/New_York' // Cambia esto también
-  })).format(now);
+  const time = useMemo(() => 
+    adjustedTime.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'America/New_York' // Cambia esto a tu zona horaria local si es necesario
+    }), 
+    [adjustedTime]
+  );
+
+  const date = useMemo(() => 
+    (new Intl.DateTimeFormat('en-US', { 
+      dateStyle: 'full', 
+      timeZone: 'America/New_York' // Cambia esto también
+    })).format(adjustedTime),
+    [adjustedTime]
+  );
 
   return (
     <section className="flex size-full flex-col gap-5 text-white">
